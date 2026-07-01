@@ -1,0 +1,80 @@
+---
+interface Props {
+  id?: string;
+  ctaLabel?: string;
+}
+const { id = 'signup', ctaLabel = 'Join the list' } = Astro.props;
+const renderedAt = Date.now();
+---
+
+<form
+  id={id}
+  data-email-form
+  method="POST"
+  action="/api/subscribe"
+  class="flex w-full max-w-md flex-col gap-3 sm:flex-row sm:gap-2"
+>
+  <input type="hidden" name="renderedAt" value={renderedAt} />
+  <input
+    type="text"
+    name="website"
+    aria-hidden="true"
+    tabindex="-1"
+    autocomplete="off"
+    style="position:absolute; left:-9999px; opacity:0; pointer-events:none"
+  />
+  <label for={`${id}-email`} class="sr-only">Email address</label>
+  <input
+    id={`${id}-email`}
+    type="email"
+    name="email"
+    required
+    placeholder="you@example.com"
+    class="w-full flex-1 border bg-transparent px-4 py-3 text-sm outline-none transition focus:border-[var(--accent)]"
+    style="border-color: var(--line); color: var(--ink);"
+  />
+  <button
+    type="submit"
+    class="whitespace-nowrap px-6 py-3 text-sm font-medium tracking-wide text-[var(--paper)] transition hover:-translate-y-0.5"
+    style="background-color: var(--accent);"
+  >
+    {ctaLabel}
+  </button>
+</form>
+<p data-email-status class="mt-3 text-sm" style="color: var(--muted);" role="status"></p>
+
+<script>
+  document.querySelectorAll('[data-email-form]').forEach((formEl) => {
+    const form = formEl as HTMLFormElement;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = form.parentElement?.querySelector('[data-email-status]') as HTMLElement | null;
+      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      const body = Object.fromEntries(new FormData(form).entries());
+      if (button) {
+        button.disabled = true;
+        button.style.opacity = '0.6';
+      }
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+        const json = await res.json();
+        if (res.ok && json.ok) {
+          window.location.href = '/thanks';
+          return;
+        }
+        if (status) status.textContent = json.error || 'Something went wrong — try again.';
+      } catch (err) {
+        if (status) status.textContent = 'Network error — please try again.';
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.style.opacity = '1';
+        }
+      }
+    });
+  });
+</script>

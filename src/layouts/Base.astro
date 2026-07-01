@@ -1,0 +1,45 @@
+---
+import SEOHead from '../components/SEOHead.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  structuredData?: object | object[];
+  ogImage?: string;
+}
+
+const { title, description, structuredData, ogImage } = Astro.props;
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Meridian',
+  url: import.meta.env.PUBLIC_SITE_URL || 'https://meridian.coffee',
+  logo: (import.meta.env.PUBLIC_SITE_URL || 'https://meridian.coffee') + '/favicon.svg',
+  sameAs: [],
+};
+const allSchema = Array.isArray(structuredData)
+  ? [...structuredData, orgSchema]
+  : structuredData
+  ? [structuredData, orgSchema]
+  : [orgSchema];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <SEOHead title={title} description={description} structuredData={allSchema} ogImage={ogImage} />
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('meridian-theme');
+          var theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          if (theme === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen">
+    <slot />
+  </body>
+</html>
