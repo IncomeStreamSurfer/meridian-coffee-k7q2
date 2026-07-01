@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import EmailCapture from '../components/EmailCapture.astro';
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'The story behind Meridian',
+  url: (import.meta.env.PUBLIC_SITE_URL || 'https://meridian.coffee') + '/about',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: import.meta.env.PUBLIC_SITE_URL || 'https://meridian.coffee' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: (import.meta.env.PUBLIC_SITE_URL || 'https://meridian.coffee') + '/about' },
+  ],
+};
+---
+
+<Base
+  title="Our Story | Meridian Specialty Coffee"
+  description="Discover why Meridian was founded and how we're rethinking specialty coffee — from farm-direct sourcing to precision roasting. Read our story."
+  structuredData={[aboutSchema, breadcrumb]}
+>
+  <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 sm:px-10">
+    <a href="/" class="font-display text-lg tracking-tight">Meridian</a>
+    <nav class="flex items-center gap-6">
+      <a href="/" class="hidden text-sm transition hover:opacity-70 sm:inline" style="color: var(--muted);">Home</a>
+      <ThemeToggle />
+    </nav>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-3xl px-6 pb-10 pt-8 sm:px-10 lg:pt-16">
+      <p class="text-xs font-medium uppercase tracking-[0.2em]" style="color: var(--accent);">Our story</p>
+      <h1 class="font-display mt-4 text-4xl leading-[1.0] tracking-tight sm:text-5xl">The story behind Meridian</h1>
+      <p class="mt-6 text-lg leading-relaxed" style="color: var(--muted);">
+        Meridian coffee started with a frustration: too much "specialty" coffee tastes like an afterthought.
+        Great green beans get roasted on a generic profile, bagged whenever, and sold months after they peaked.
+        We wanted a cup where every step — sourcing, roasting, shipping — was calibrated on purpose.
+      </p>
+    </section>
+
+    <section class="border-t" style="border-color: var(--line);">
+      <div class="mx-auto max-w-3xl px-6 py-16 sm:px-10">
+        <div class="mb-12 aspect-[16/9] w-full overflow-hidden border" style="border-color: var(--line);">
+          <img
+            src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=1400&auto=format&fit=crop"
+            alt="Coffee cherries being hand-picked at a specialty farm during harvest"
+            class="h-full w-full object-cover grayscale-[15%]"
+            loading="lazy"
+          />
+        </div>
+
+        <h2 class="font-display text-3xl leading-[1.05] tracking-tight">Why we started this</h2>
+        <p class="mt-4 text-base leading-relaxed" style="color: var(--muted);">
+          Our founder spent six years buying green coffee for other roasters before deciding the industry's default
+          — buy on a schedule, roast to a template, ship when the warehouse gets around to it — was leaving flavor
+          on the table. Meridian is the company that gets built when you can finally do it the way you always
+          wanted to: fewer origins, deeper relationships, and a roast curve tuned per lot instead of forced onto one.
+        </p>
+
+        <h2 class="font-display mt-14 text-3xl leading-[1.05] tracking-tight">Sourced with precision</h2>
+        <p class="mt-4 text-base leading-relaxed" style="color: var(--muted);">
+          We buy directly from three growing regions — a washed Yirgacheffe co-operative in Ethiopia, a family lot
+          in Huila, Colombia, and a wet-hulled Sumatra farm we've worked with since our founder's buying days. Every
+          contract pays above Fairtrade minimums, and every lot is cupped before it's committed to, not after.
+          Direct trade isn't a badge on our bag; it's the only way we source.
+        </p>
+
+        <h2 class="font-display mt-14 text-3xl leading-[1.05] tracking-tight">Roasted with intent</h2>
+        <p class="mt-4 text-base leading-relaxed" style="color: var(--muted);">
+          Each origin gets its own logged roast curve — charge temperature, first crack, development time — tasted
+          and adjusted across multiple batches until the cup matches what that specific lot is capable of. We roast
+          in small batches on a drum roaster built for control, not volume, and we log every curve so a bag you buy
+          in month one tastes the same as a bag you buy in month six.
+        </p>
+
+        <h2 class="font-display mt-14 text-3xl leading-[1.05] tracking-tight">Shipped at its peak</h2>
+        <p class="mt-4 text-base leading-relaxed" style="color: var(--muted);">
+          Coffee is a perishable product that gets sold like it isn't. We roast to order in small runs and ship
+          within 48 hours, so a bag never sits degassing on a shelf before it reaches your kitchen. It's a smaller,
+          slower way to run a coffee company — and it's the only way we're willing to run this one.
+        </p>
+
+        <h2 class="font-display mt-14 text-3xl leading-[1.05] tracking-tight">What's next</h2>
+        <p class="mt-4 text-base leading-relaxed" style="color: var(--muted);">
+          We're finishing our final roast curves and locking in packaging before we open the doors later this year.
+          The people on our early access list get first access, founding-member pricing, and a say in which origin
+          we feature first. If that sounds like your kind of coffee, <a href="/" class="underline transition hover:opacity-70" style="color: var(--accent);">join the list on our home page</a> —
+          we'll only email you when there's real news.
+        </p>
+      </div>
+    </section>
+
+    <section class="border-t" style="border-color: var(--line);">
+      <div class="mx-auto max-w-2xl px-6 py-20 text-center sm:px-10">
+        <h2 class="font-display text-3xl leading-[1.02] tracking-tight sm:text-4xl">Want to be part of the first batch?</h2>
+        <p class="mx-auto mt-4 max-w-md text-base leading-relaxed" style="color: var(--muted);">
+          Join the list and we'll email you the moment Meridian opens.
+        </p>
+        <div class="mt-8 flex justify-center">
+          <EmailCapture id="about-signup" ctaLabel="Join the list" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t" style="border-color: var(--line);">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm sm:flex-row sm:px-10" style="color: var(--muted);">
+      <p class="font-display text-base" style="color: var(--ink);">Meridian</p>
+      <nav class="flex gap-6">
+        <a href="/" class="transition hover:opacity-70">Home</a>
+        <a href="/about" class="transition hover:opacity-70">About</a>
+        <a href="/thanks" class="transition hover:opacity-70">Thanks</a>
+      </nav>
+      <p>&copy; 2026 Meridian Coffee. All rights reserved.</p>
+    </div>
+  </footer>
+</Base>

@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: "You're on the list",
+  url: (import.meta.env.PUBLIC_SITE_URL || 'https://meridian.coffee') + '/thanks',
+};
+---
+
+<Base
+  title="You're In | Meridian Coffee"
+  description="Thanks for joining Meridian's early access list — we'll be in touch soon with launch details and founding-member offers."
+  structuredData={[webPageSchema]}
+>
+  <header class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 sm:px-10">
+    <a href="/" class="font-display text-lg tracking-tight">Meridian</a>
+    <nav class="flex items-center gap-6">
+      <a href="/about" class="hidden text-sm transition hover:opacity-70 sm:inline" style="color: var(--muted);">About</a>
+      <ThemeToggle />
+    </nav>
+  </header>
+
+  <main class="mx-auto flex min-h-[70vh] max-w-2xl flex-col items-center justify-center px-6 py-16 text-center sm:px-10">
+    <p class="text-xs font-medium uppercase tracking-[0.2em]" style="color: var(--accent);">Confirmed</p>
+    <h1 class="font-display mt-4 text-4xl leading-[1.0] tracking-tight sm:text-5xl">You're on the list</h1>
+    <p class="mt-6 max-w-md text-lg leading-relaxed" style="color: var(--muted);">
+      Thank you for joining Meridian's early access list. We're finishing our last few roast curves — you'll be
+      the first to hear when we open the doors, with founding-member pricing and first pick of our debut lineup.
+    </p>
+    <p class="mt-4 max-w-md text-base leading-relaxed" style="color: var(--muted);">
+      In the meantime, curious how we got here? <a href="/about" class="underline transition hover:opacity-70" style="color: var(--accent);">Read the story behind Meridian</a>.
+    </p>
+    <a
+      href="/"
+      class="mt-10 inline-flex items-center gap-2 px-6 py-3 text-sm font-medium tracking-wide text-[var(--paper)] transition hover:-translate-y-0.5"
+      style="background-color: var(--accent);"
+    >
+      Back to home
+    </a>
+  </main>
+
+  <footer class="border-t" style="border-color: var(--line);">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 text-sm sm:flex-row sm:px-10" style="color: var(--muted);">
+      <p class="font-display text-base" style="color: var(--ink);">Meridian</p>
+      <nav class="flex gap-6">
+        <a href="/" class="transition hover:opacity-70">Home</a>
+        <a href="/about" class="transition hover:opacity-70">About</a>
+      </nav>
+      <p>&copy; 2026 Meridian Coffee. All rights reserved.</p>
+    </div>
+  </footer>
+</Base>
