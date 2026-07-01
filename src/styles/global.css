@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Fraunces";
+  src: local("Fraunces");
+}
+
+:root {
+  --paper: #f6f1e7;
+  --ink: #1c1a16;
+  --muted: #6b6457;
+  --accent: #b1502f;
+  --line: rgba(28, 26, 22, 0.12);
+}
+
+html.dark {
+  --paper: #17140f;
+  --ink: #f3ede1;
+  --muted: #a89e8c;
+  --accent: #d97847;
+  --line: rgba(243, 237, 225, 0.14);
+}
+
+html,
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.font-display {
+  font-family: "Fraunces", ui-serif, Georgia, serif;
+}
